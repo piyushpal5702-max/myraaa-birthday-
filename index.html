@@ -1496,11 +1496,14 @@ function deckRender() {
 
     card.style.pointerEvents =
       depth === 0 ? "auto" : "none";
-if (depth === 0) {
-  card.classList.remove("reveal-card");
-  void card.offsetWidth;
-  card.classList.add("reveal-card");
-}
+
+    if (depth === 0) {
+      card.classList.remove("reveal-card");
+      void card.offsetWidth;
+      card.classList.add("reveal-card");
+    }
+
+  });
 
   deckCounter.textContent =
     String(deckIndex + 1).padStart(2, "0")
