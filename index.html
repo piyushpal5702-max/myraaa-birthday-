@@ -716,19 +716,14 @@ footer p {
     </div>
 
     <div class="track-name" id="trackName">
-      our song ♡
+      your song ♡
     </div>
 
     
 <audio id="audio" loop preload="none">
   <source src="./out%20song.mp3" type="audio/mpeg">
 </audio>
-
-<button id="musicBtn" onclick="toggleMusic()">
-  ♡ PLAY MUSIC
-</button>
     
-
   </div>
 </section>
 
@@ -798,25 +793,23 @@ const playBtn = document.getElementById("playBtn");
 const musicIcon = document.getElementById("musicIcon");
 
 function toggleMusic() {
+  const audio = document.getElementById("audio");
+  const button = document.getElementById("playBtn");
 
   if (audio.paused) {
-    audio.play().then(() => {
-      playBtn.textContent = "Ⅱ Pause song";
-      musicIcon.style.animation = "pulse 2s infinite";
-    }).catch(() => {
-      playBtn.textContent = "▶ Try again";
-    });
+    audio.play()
+      .then(() => {
+        button.textContent = "❚❚ Pause song";
+      })
+      .catch(error => {
+        console.error("Audio error:", error);
+        button.textContent = "Music unavailable";
+      });
   } else {
     audio.pause();
-    playBtn.textContent = "▶ Play song";
-    musicIcon.style.animation = "none";
+    button.textContent = "▶ Play song";
   }
 }
-
-audio.addEventListener("ended", () => {
-  playBtn.textContent = "▶ Play song";
-  musicIcon.style.animation = "none";
-});
 
 // SCROLL BLUR REVEAL
 
