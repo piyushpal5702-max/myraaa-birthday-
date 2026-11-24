@@ -961,7 +961,8 @@ function enterWebsite() {
   }, 1300);
 }
 
-  
+
+
 const gameQuestions = [
   {
     q: "What nickname does he call me the most?",
@@ -1120,7 +1121,9 @@ function showBirthdaySurprise() {
   document.getElementById("birthday-surprise").style.display = "block";
 }
 
-loadGameQuestion();
+document.addEventListener("DOMContentLoaded", function () {
+  loadGameQuestion();
+});
  
 </script>
 
