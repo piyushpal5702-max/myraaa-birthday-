@@ -961,9 +961,7 @@ function enterWebsite() {
   }, 1300);
 }
 
-
-
-const gameQuestions = [
+  const gameQuestions = [
   {
     q: "What nickname does he call me the most?",
     options: ["Myraa", "Goosebumps", "Baby", "Princess"],
@@ -1037,12 +1035,16 @@ let gameAnswered = false;
 
 function loadGameQuestion() {
   const question = gameQuestions[gameIndex];
-
   gameAnswered = false;
 
-  document.getElementById("game-intro").style.display = "none";
   document.getElementById("game-result").style.display = "none";
   document.getElementById("birthday-surprise").style.display = "none";
+
+  document.getElementById("game-question").style.display = "block";
+  document.getElementById("game-options").style.display = "block";
+  document.getElementById("game-feedback").style.display = "block";
+  document.getElementById("game-next").style.display = "inline-block";
+  document.getElementById("game-count").style.display = "block";
 
   document.getElementById("game-count").textContent =
     `Question ${gameIndex + 1} of ${gameQuestions.length}`;
@@ -1062,16 +1064,13 @@ function loadGameQuestion() {
     const button = document.createElement("button");
     button.className = "game-option";
     button.textContent = option;
-
     button.onclick = () => chooseGameAnswer(index, button);
-
     optionsBox.appendChild(button);
   });
 }
 
 function chooseGameAnswer(index, selectedButton) {
   if (gameAnswered) return;
-
   gameAnswered = true;
 
   const question = gameQuestions[gameIndex];
@@ -1096,7 +1095,6 @@ function chooseGameAnswer(index, selectedButton) {
 
 function nextGameQuestion() {
   if (!gameAnswered) return;
-
   gameIndex++;
 
   if (gameIndex < gameQuestions.length) {
@@ -1121,16 +1119,14 @@ function showBirthdaySurprise() {
   document.getElementById("birthday-surprise").style.display = "block";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("game-welcome").style.display = "block";
-  document.getElementById("game-play").style.display = "none";
-});
 function startMyraaGame() {
+  gameIndex = 0;
+  gameScore = 0;
   document.getElementById("game-welcome").style.display = "none";
   document.getElementById("game-play").style.display = "block";
   loadGameQuestion();
-  
 }
+
  
 </script>
 
@@ -1173,7 +1169,10 @@ function startMyraaGame() {
       <p>Happy Birthday, Myraa. You make ordinary moments feel special. I hope your day is as wonderful as you are.</p>
       <p>With love, always. ♡</p>
     </div>
+
+  </div>
 </section>
+
 
 
 </body>
