@@ -737,6 +737,118 @@ footer p {
   box-shadow: 0 0 20px rgba(212,175,112,0.35);
 }
 
+/* ===== SWIPEABLE PHOTO DECK ===== */
+
+.photo-deck {
+  width: min(100%, 430px);
+  margin: 40px auto 0;
+}
+
+.deck-stage {
+  width: 100%;
+  height: 490px;
+  position: relative;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.deck-cards {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.deck-card {
+  position: absolute;
+  inset: 0;
+  padding: 12px;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #4b2936, #21121d);
+  border: 1px solid rgba(232,205,165,.65);
+  box-shadow: 0 15px 40px rgba(0,0,0,.4);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition:
+    transform .4s ease,
+    opacity .4s ease;
+  overflow: hidden;
+}
+
+.deck-card img {
+  width: 100%;
+  height: calc(100% - 43px);
+  flex: 1;
+  min-height: 0;
+  object-fit: contain;
+  display: block;
+  border-radius: 9px;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.deck-card p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--gold);
+  line-height: 1.3;
+  min-height: 22px;
+}
+
+.deck-card.fly-left {
+  transform: translateX(-140%) rotate(-18deg) !important;
+  opacity: 0;
+}
+
+.deck-card.fly-right {
+  transform: translateX(140%) rotate(18deg) !important;
+  opacity: 0;
+}
+
+.deck-counter {
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 4px;
+  margin-top: 28px;
+}
+
+.deck-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.deck-controls span {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.deck-controls button {
+  width: 43px;
+  height: 43px;
+  padding: 0;
+  border: 1px solid var(--gold);
+  background: rgba(255,255,255,.06);
+  color: var(--gold);
+  font-size: 22px;
+  border-radius: 50%;
+}
+
+.deck-controls button:active {
+  transform: scale(.9);
+}
+
+@media(max-width: 480px) {
+  .deck-stage {
+    height: 430px;
+  }
+}
+
 </style>
 </head>
 
@@ -859,46 +971,33 @@ footer p {
 <!-- MEMORIES -->
 
 <section id="memories">
+
   <div class="reveal">
     <div class="eyebrow">Little moments, forever memories</div>
     <h2>Our little <span class="gold">world.</span></h2>
     <p>Every picture has a story of its own.</p>
   </div>
 
-  <div class="gallery reveal">
+  <div class="photo-deck reveal">
 
-    <div class="photo">
-      <img src="photo1.jpg" alt="Memory 1">
-      <p>One of my favourite moments ♡</p>
+    <div class="deck-stage" id="deckStage">
+      <div class="deck-cards" id="deckCards"></div>
     </div>
 
-    <div class="photo">
-      <img src="photo2.jpg" alt="Memory 2">
-      <p>Just us, being us.</p>
+    <div class="deck-counter" id="deckCounter">
+      01 / 06
     </div>
 
-    <div class="photo">
-      <img src="photo3.jpg" alt="Memory 3">
-      <p>A little moment to remember.</p>
-    </div>
-
-    <div class="photo">
-      <img src="photo4.jpg" alt="Memory 4">
-      <p>My favourite kind of chaos.</p>
-    </div>
-
-    <div class="photo">
-      <img src="photo5.jpg" alt="Memory 5">
-      <p>Another beautiful memory.</p>
-    </div>
-
-    <div class="photo">
-      <img src="photo6.jpg" alt="Memory 6">
-      <p>To many more memories ♡</p>
+    <div class="deck-controls">
+      <button type="button" onclick="deckPrev()">←</button>
+      <span>SWIPE TO EXPLORE ♡</span>
+      <button type="button" onclick="deckNext()">→</button>
     </div>
 
   </div>
+
 </section>
+
 
 <!-- MUSIC -->
 
@@ -1295,6 +1394,176 @@ function myraaSurpriseReveal() {
 
   createGameHearts();
 }
+
+  
+/* ===== SWIPEABLE PHOTO DECK ===== */
+
+const deckPhotos = [
+  {
+    src: "photo1.jpg",
+    caption: "One of my favourite moments ♡"
+  },
+  {
+    src: "photo2.jpg",
+    caption: "Just us, being us."
+  },
+  {
+    src: "photo3.jpg",
+    caption: "A little moment to remember."
+  },
+  {
+    src: "photo4.jpg",
+    caption: "My favourite kind of chaos."
+  },
+  {
+    src: "photo5.jpg",
+    caption: "Another beautiful memory."
+  },
+  {
+    src: "photo6.jpg",
+    caption: "To many more memories ♡"
+  }
+];
+
+let deckIndex = 0;
+let deckBusy = false;
+let deckStartX = 0;
+
+const deckCards = document.getElementById("deckCards");
+const deckCounter = document.getElementById("deckCounter");
+const deckStage = document.getElementById("deckStage");
+
+
+// Create photo cards
+
+deckPhotos.forEach((photo) => {
+
+  const card = document.createElement("div");
+  card.className = "deck-card";
+
+  const img = document.createElement("img");
+  img.src = photo.src;
+  img.alt = "Photo memory";
+  img.draggable = false;
+
+  const caption = document.createElement("p");
+  caption.textContent = photo.caption;
+
+  card.appendChild(img);
+  card.appendChild(caption);
+
+  deckCards.appendChild(card);
+
+});
+
+
+// Display the card stack
+
+function deckRender() {
+
+  const cards = Array.from(deckCards.children);
+
+  cards.forEach((card, index) => {
+
+    const depth =
+      (index - deckIndex + deckPhotos.length)
+      % deckPhotos.length;
+
+    card.style.zIndex = deckPhotos.length - depth;
+
+    card.style.transform =
+      `translateY(${depth * 7}px)
+       scale(${1 - depth * 0.035})
+       rotate(${depth * 2}deg)`;
+
+    card.style.opacity = depth > 3 ? "0" : "1";
+
+    card.style.pointerEvents =
+      depth === 0 ? "auto" : "none";
+
+  });
+
+  deckCounter.textContent =
+    String(deckIndex + 1).padStart(2, "0")
+    + " / "
+    + String(deckPhotos.length).padStart(2, "0");
+
+}
+
+
+// Move the top card
+
+function deckMove(direction) {
+
+  if (deckBusy) return;
+
+  deckBusy = true;
+
+  const cards = Array.from(deckCards.children);
+  const topCard = cards[deckIndex];
+
+  topCard.classList.add(
+    direction === 1 ? "fly-left" : "fly-right"
+  );
+
+  setTimeout(() => {
+
+    deckIndex =
+      (deckIndex + direction + deckPhotos.length)
+      % deckPhotos.length;
+
+    topCard.classList.remove("fly-left", "fly-right");
+
+    deckRender();
+
+    deckBusy = false;
+
+  }, 400);
+
+}
+
+
+// Next and previous buttons
+
+function deckNext() {
+  deckMove(1);
+}
+
+function deckPrev() {
+  deckMove(-1);
+}
+
+
+// Swipe support
+
+deckStage.addEventListener("pointerdown", function(event) {
+
+  if (deckBusy) return;
+
+  deckStartX = event.clientX;
+
+});
+
+deckStage.addEventListener("pointerup", function(event) {
+
+  if (deckBusy) return;
+
+  const distance = event.clientX - deckStartX;
+
+  if (distance < -45) {
+    deckNext();
+  }
+
+  if (distance > 45) {
+    deckPrev();
+  }
+
+});
+
+
+// Initialise the deck
+
+deckRender();
 
 </script>
 
