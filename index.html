@@ -754,25 +754,6 @@ footer p {
 
 <script>
   
-function toggleMusic() {
-  const audio = document.getElementById("audio");
-  const button = document.getElementById("musicBtn");
-
-  if (audio.paused) {
-    audio.play()
-      .then(() => {
-        button.textContent = "♡ PAUSE MUSIC";
-      })
-      .catch(error => {
-        console.log("Music error:", error);
-        button.textContent = "MUSIC COULD NOT PLAY";
-      });
-  } else {
-    audio.pause();
-    button.textContent = "♡ PLAY MUSIC";
-  }
-}
-  
 
 // ENVELOPE
 
@@ -793,23 +774,29 @@ const playBtn = document.getElementById("playBtn");
 const musicIcon = document.getElementById("musicIcon");
 
 
-function toggleMusic() {
+
+async function toggleMusic() {
   const audio = document.getElementById("audio");
   const button = document.getElementById("playBtn");
 
-  audio.play()
-    .then(() => {
-      button.textContent = "❚❚ Pause song";
-    })
-    .catch(error => {
-      alert(
-        "Audio error: " + error.name +
-        "\n" + error.message
-      );
-      console.log(error);
-    });
+  if (!audio || !button) return;
+
+  if (!audio.paused) {
+    audio.pause();
+    button.textContent = "▶ Play song";
+    return;
+  }
+
+  try {
+    await audio.play();
+    button.textContent = "❚❚ Pause song";
+  } catch (error) {
+    console.error("Music error:", error);
+    button.textContent = "▶ Play song";
+    alert("Music error: " + error.name + " - " + error.message);
+  }
 }
-  
+
 
 // SCROLL BLUR REVEAL
 
