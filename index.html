@@ -530,6 +530,117 @@ footer p {
     font-size: 9px;
   }
 }
+  
+/* MYRAA GAME DESIGN */
+#myraa-game {
+  padding: 75px 18px;
+  text-align: center;
+  background: linear-gradient(135deg, #19070d, #3b101e, #16070c);
+  color: #f8e9df;
+}
+
+.game-card {
+  max-width: 520px;
+  margin: auto;
+  padding: 30px 22px;
+  border: 1px solid #a77b64;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.045);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+}
+
+.game-label {
+  color: #d6ad91;
+  letter-spacing: 3px;
+  font-size: 11px;
+}
+
+.game-card h2 {
+  font-family: Georgia, serif;
+  font-size: 30px;
+}
+
+#game-question {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  margin: 28px 0;
+}
+
+.game-progress {
+  height: 5px;
+  background: #60404a;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 25px;
+}
+
+#game-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #d9b18e;
+  transition: width 0.3s;
+}
+
+#game-count {
+  color: #d6ad91;
+  font-size: 13px;
+}
+
+.game-option {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border: 1px solid #a77b64;
+  border-radius: 12px;
+  background: transparent;
+  color: #f8e9df;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.game-option:hover {
+  background: #653043;
+}
+
+.game-option:disabled {
+  opacity: 0.85;
+  cursor: default;
+}
+
+.game-option.selected {
+  background: #653043;
+  border-color: #e4c3a3;
+}
+
+#game-next,
+#game-result button {
+  margin-top: 22px;
+  padding: 13px 25px;
+  border: none;
+  border-radius: 30px;
+  background: #d9b18e;
+  color: #281017;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#game-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#game-feedback {
+  min-height: 24px;
+  color: #e5c6a8;
+}
+
+#game-result,
+#birthday-surprise {
+  margin-top: 25px;
+  line-height: 1.8;
+}
+
 </style>
 </head>
 
@@ -849,8 +960,205 @@ function enterWebsite() {
     intro.style.display = "none";
   }, 1300);
 }
+
   
+const gameQuestions = [
+  {
+    q: "What nickname does he call me the most?",
+    options: ["Myraa", "Goosebumps", "Baby", "Princess"],
+    correct: [0]
+  },
+  {
+    q: "Who usually starts the conversation first?",
+    options: ["Him", "Me", "Both equally", "Depends on the day"],
+    correct: [3]
+  },
+  {
+    q: "What's his favourite thing about me?",
+    options: ["My smile", "My voice", "My personality", "Everything"],
+    correct: [3]
+  },
+  {
+    q: "What was our first proper conversation about?",
+    options: [
+      "The trip with family",
+      "Harry Potter houses",
+      "Telling you about my exes",
+      "None of the above"
+    ],
+    correct: [0]
+  },
+  {
+    q: "Who fell for whom first?",
+    options: ["Him", "Me", "Both at the same time", "Still a mystery"],
+    correct: [0]
+  },
+  {
+    q: "Which moment together would he love to relive?",
+    options: [
+      "The first staircase",
+      "The ground-close conversation",
+      "Going out with you for the first time",
+      "The farewell day"
+    ],
+    correct: [1]
+  },
+  {
+    q: "What's one thing about us that you never want to change?",
+    options: [
+      "Our silly conversations",
+      "The way we care for each other",
+      "Our little memories",
+      "Everything about us"
+    ],
+    correct: [0, 1, 2, 3]
+  },
+  {
+    q: "If he could plan one perfect day with me, what would it include?",
+    options: [
+      "A long drive",
+      "A movie date",
+      "Just spending time together",
+      "A surprise adventure"
+    ],
+    correct: [0, 2]
+  },
+  {
+    q: "What's his favourite name for me?",
+    options: ["Kritika", "Myraa", "Goosebumps", "All of them"],
+    correct: [1]
+  }
+];
+
+let gameIndex = 0;
+let gameScore = 0;
+let gameAnswered = false;
+
+function loadGameQuestion() {
+  const question = gameQuestions[gameIndex];
+
+  gameAnswered = false;
+
+  document.getElementById("game-intro").style.display = "none";
+  document.getElementById("game-result").style.display = "none";
+  document.getElementById("birthday-surprise").style.display = "none";
+
+  document.getElementById("game-count").textContent =
+    `Question ${gameIndex + 1} of ${gameQuestions.length}`;
+
+  document.getElementById("game-progress-fill").style.width =
+    `${(gameIndex / gameQuestions.length) * 100}%`;
+
+  document.getElementById("game-question").textContent = question.q;
+  document.getElementById("game-feedback").textContent = "";
+
+  const optionsBox = document.getElementById("game-options");
+  optionsBox.innerHTML = "";
+
+  document.getElementById("game-next").disabled = true;
+
+  question.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "game-option";
+    button.textContent = option;
+
+    button.onclick = () => chooseGameAnswer(index, button);
+
+    optionsBox.appendChild(button);
+  });
+}
+
+function chooseGameAnswer(index, selectedButton) {
+  if (gameAnswered) return;
+
+  gameAnswered = true;
+
+  const question = gameQuestions[gameIndex];
+  const isCorrect = question.correct.includes(index);
+
+  if (isCorrect) {
+    gameScore++;
+    document.getElementById("game-feedback").textContent =
+      "That's right! You know us so well. ♡";
+  } else {
+    document.getElementById("game-feedback").textContent =
+      "Aww, nice try! ♡";
+  }
+
+  document.querySelectorAll(".game-option").forEach(button => {
+    button.disabled = true;
+  });
+
+  selectedButton.classList.add("selected");
+  document.getElementById("game-next").disabled = false;
+}
+
+function nextGameQuestion() {
+  if (!gameAnswered) return;
+
+  gameIndex++;
+
+  if (gameIndex < gameQuestions.length) {
+    loadGameQuestion();
+  } else {
+    document.getElementById("game-question").style.display = "none";
+    document.getElementById("game-options").style.display = "none";
+    document.getElementById("game-feedback").style.display = "none";
+    document.getElementById("game-next").style.display = "none";
+    document.getElementById("game-count").style.display = "none";
+
+    document.getElementById("game-progress-fill").style.width = "100%";
+
+    document.getElementById("game-result").style.display = "block";
+    document.getElementById("game-score").textContent =
+      `You got ${gameScore} out of ${gameQuestions.length} questions right!`;
+  }
+}
+
+function showBirthdaySurprise() {
+  document.getElementById("game-result").style.display = "none";
+  document.getElementById("birthday-surprise").style.display = "block";
+}
+
+loadGameQuestion();
+ 
 </script>
+
+<!-- MYRAA'S BIRTHDAY GAME -->
+<section id="myraa-game">
+  <div class="game-card">
+    <p class="game-label">A LITTLE CHALLENGE FOR YOU ♡</p>
+    <h2>How Well Do You Know Us?</h2>
+    <p id="game-intro">Let's see how well you remember our little world together.</p>
+
+    <div class="game-progress">
+      <div id="game-progress-fill"></div>
+    </div>
+
+    <p id="game-count">Question 1 of 9</p>
+    <h3 id="game-question"></h3>
+
+    <div id="game-options"></div>
+    <p id="game-feedback"></p>
+
+    <button id="game-next" onclick="nextGameQuestion()" disabled>
+      NEXT ♡
+    </button>
+
+    <div id="game-result" style="display:none;">
+      <h2>You did it, Myraa! ♡</h2>
+      <p id="game-score"></p>
+      <p>Some memories are little treasures, and you're my favourite one.</p>
+      <button onclick="showBirthdaySurprise()">UNLOCK YOUR SURPRISE ♡</button>
+    </div>
+
+    <div id="birthday-surprise" style="display:none;">
+      <h2>A Little Something For You ♡</h2>
+      <p>Happy Birthday, Myraa. You make ordinary moments feel special. I hope your day is as wonderful as you are.</p>
+      <p>With love, always. ♡</p>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
