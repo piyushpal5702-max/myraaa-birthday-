@@ -183,5 +183,33 @@ function playOurSong(){
 }
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const photos = document.querySelectorAll(".gallery img");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const photo = entry.target;
+        const delay = Number(photo.dataset.delay || 0);
+
+        setTimeout(() => {
+          photo.classList.add("revealed");
+        }, delay);
+
+        observer.unobserve(photo);
+      }
+    });
+  }, {
+    threshold: 0.15
+  });
+
+  photos.forEach((photo, index) => {
+    photo.dataset.delay = (index % 4) * 160;
+    observer.observe(photo);
+  });
+});
+</script>
+
 </body>
 </html>
