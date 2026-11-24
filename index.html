@@ -794,24 +794,24 @@ const audio = document.getElementById("audio");
 const playBtn = document.getElementById("playBtn");
 const musicIcon = document.getElementById("musicIcon");
 
+
 function toggleMusic() {
   const audio = document.getElementById("audio");
   const button = document.getElementById("playBtn");
 
-  if (audio.paused) {
-    audio.play()
-      .then(() => {
-        button.textContent = "❚❚ Pause song";
-      })
-      .catch(error => {
-        console.error("Audio error:", error);
-        button.textContent = "Music unavailable";
-      });
-  } else {
-    audio.pause();
-    button.textContent = "▶ Play song";
-  }
+  audio.play()
+    .then(() => {
+      button.textContent = "❚❚ Pause song";
+    })
+    .catch(error => {
+      alert(
+        "Audio error: " + error.name +
+        "\n" + error.message
+      );
+      console.log(error);
+    });
 }
+  
 
 // SCROLL BLUR REVEAL
 
