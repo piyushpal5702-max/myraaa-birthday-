@@ -865,6 +865,102 @@ footer p {
 .deck-card.reveal-card {
   animation: cardReveal 0.55s cubic-bezier(.2,.8,.2,1);
 }
+  
+/* ===== BOUQUET SURPRISE ===== */
+
+#bouquetSurprise {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -500px;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* TRANSPARENT BOUQUET IMAGE */
+
+.bouquet-image {
+  width: min(85vw, 390px);
+  max-height: 55vh;
+  height: auto;
+  object-fit: contain;
+  display: block;
+
+  filter:
+    drop-shadow(0 0 8px rgba(255,215,140,.35))
+    drop-shadow(0 0 20px rgba(255,190,90,.30))
+    drop-shadow(0 0 38px rgba(255,170,70,.20));
+
+  animation: goldenGlow 3s ease-in-out infinite alternate;
+}
+
+/* GOLDEN GLOW */
+
+@keyframes goldenGlow {
+  from {
+    filter:
+      drop-shadow(0 0 7px rgba(255,215,140,.25))
+      drop-shadow(0 0 18px rgba(255,190,90,.20));
+  }
+
+  to {
+    filter:
+      drop-shadow(0 0 13px rgba(255,225,160,.60))
+      drop-shadow(0 0 28px rgba(255,190,90,.45))
+      drop-shadow(0 0 45px rgba(255,170,70,.25));
+  }
+}
+
+/* BOUQUET RISING ANIMATION */
+
+#bouquetSurprise.show {
+  animation: bouquetRise 1.6s cubic-bezier(.2,.8,.3,1) forwards;
+}
+
+@keyframes bouquetRise {
+  0% {
+    bottom: -500px;
+    opacity: 0;
+    transform: scale(.75);
+  }
+
+  75% {
+    bottom: 45px;
+    opacity: 1;
+    transform: scale(1.04);
+  }
+
+  100% {
+    bottom: 35px;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* BOUQUET MESSAGE */
+
+#bouquetSurprise p {
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+@media(max-width: 480px) {
+  .bouquet-image {
+    width: 88vw;
+    max-height: 55vh;
+  }
+}
+
 </style>
 </head>
 
@@ -1073,7 +1169,19 @@ footer p {
     A LITTLE UNIVERSE OF OUR OWN
   </p>
 </footer>
+<!-- BOUQUET SURPRISE -->
 
+<div id="bouquetSurprise">
+
+  <img
+    src="./bouquet.png"
+    class="bouquet-image"
+    alt="Two sunflowers and white roses"
+  >
+
+  <p>A little bouquet, just for you ♡</p>
+
+</div>
 <script>
   
 
@@ -1328,6 +1436,7 @@ function nextGameQuestion() {
 
 function showBirthdaySurprise() {
   myraaSurpriseReveal();
+  showBouquetSurprise();
   document.getElementById("game-result").style.display = "none";
   document.getElementById("birthday-surprise").style.display = "block";
 }
@@ -1586,6 +1695,22 @@ deckStage.addEventListener("pointerup", function(event) {
 // Initialise the deck
 
 deckRender();
+
+
+  /* ===== BOUQUET SURPRISE FUNCTION ===== */
+
+function showBouquetSurprise() {
+
+  const bouquet =
+    document.getElementById("bouquetSurprise");
+
+  bouquet.classList.remove("show");
+
+  void bouquet.offsetWidth;
+
+  bouquet.classList.add("show");
+
+}
 
 </script>
 
