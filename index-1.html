@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff0f4">
+  <title>For Myraaa ❤️</title>
+  <style>
+    :root {
+      --pink: #e85d83;
+      --deep: #8f3155;
+      --soft: #fff0f4;
+      --ink: #442535;
+      --muted: #805c6b;
+      --card: rgba(255,255,255,.82);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 10% 10%, #ffe0e9 0, transparent 30%),
+        radial-gradient(circle at 90% 35%, #ffe8d9 0, transparent 28%),
+        linear-gradient(145deg, #fff7f8, #fff0f4 55%, #fff8f1);
+      min-height: 100vh;
+    }
+    .wrap { width: min(940px, 92%); margin: auto; }
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 76px 18px 58px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before, .hero::after {
+      content: "♡";
+      position: absolute;
+      color: rgba(232,93,131,.16);
+      font-size: clamp(100px, 24vw, 220px);
+      z-index: 0;
+    }
+    .hero::before { left: -24px; top: 12%; transform: rotate(-18deg); }
+    .hero::after { right: -24px; bottom: 4%; transform: rotate(18deg); }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font: 700 11px/1.5 Arial, sans-serif;
+      color: var(--pink);
+    }
+    h1 {
+      font-size: clamp(48px, 12vw, 88px);
+      line-height: .98;
+      margin: 18px 0;
+      color: var(--deep);
+      font-weight: 500;
+    }
+    .hero p { font-size: clamp(17px, 4vw, 21px); line-height: 1.7; color: var(--muted); }
+    .heart { color: var(--pink); }
+    .button {
+      display: inline-block;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 23px;
+      margin: 12px 5px;
+      color: white;
+      background: linear-gradient(135deg, #ed7294, #c94775);
+      box-shadow: 0 9px 24px rgba(201,71,117,.22);
+      font: 700 14px Arial, sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    section { padding: 54px 0; }
+    .section-head { text-align: center; margin: 0 auto 28px; max-width: 650px; }
+    .section-head h2 { color: var(--deep); font-size: clamp(30px, 7vw, 43px); font-weight: 500; margin: 9px 0; }
+    .section-head p { color: var(--muted); line-height: 1.7; margin: 8px 0; }
+    .paper, .music-card {
+      background: var(--card);
+      border: 1px solid rgba(232,93,131,.13);
+      border-radius: 24px;
+      padding: clamp(22px, 5vw, 36px);
+      box-shadow: 0 14px 40px rgba(120,55,80,.07);
+      backdrop-filter: blur(8px);
+    }
+    .letter { font-size: 18px; line-height: 1.9; text-align: center; color: #684454; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 17px;
+      background: #f7dce5;
+      box-shadow: 0 8px 22px rgba(100,40,65,.10);
+    }
+    .videos { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .video-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 10px;
+      border: 1px solid rgba(232,93,131,.14);
+      box-shadow: 0 10px 28px rgba(100,40,65,.08);
+    }
+    .video-card video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #21151b;
+      border-radius: 14px;
+    }
+    .video-caption { text-align: center; color: var(--muted); font-style: italic; padding: 10px 5px 3px; }
+    .music-card { text-align: center; }
+    .music-icon { font-size: 52px; }
+    .music-card h3 { color: var(--deep); font-size: 25px; font-weight: 500; margin: 12px 0; }
+    .music-card p { color: var(--muted); line-height: 1.7; }
+    .small { font: 12px Arial, sans-serif; min-height: 18px; }
+    footer { text-align: center; padding: 30px 15px 48px; color: var(--muted); }
+    .footer-heart { font-size: 28px; color: var(--pink); }
+    @media (min-width: 650px) {
+      .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+      .videos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .video-card:last-child { grid-column: 1 / -1; max-width: 70%; justify-self: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">A little world made just for you</div>
+      <h1>Happy Birthday,<br>Myraaa <span class="heart">♡</span></h1>
+      <p>For the girl who makes ordinary moments feel magical.<br>This little page is filled with memories, smiles and all my love.</p>
+      <a class="button" href="#memories">Open your little surprise ↓</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="message">
+      <div class="section-head">
+        <div class="eyebrow">A note from my heart</div>
+        <h2>To my favourite person 💗</h2>
+      </div>
+      <div class="paper letter">
+        Myraaa, I hope this year brings you endless reasons to smile,
+        beautiful little surprises and everything your heart wishes for.
+        Thank you for being you and for making so many moments special.
+        No matter how many pictures or words I put here, they could never
+        hold everything I feel. Happy birthday, my favourite human. ❤️
+      </div>
+    </section>
+
+    <section id="memories">
+      <div class="section-head">
+        <div class="eyebrow">Little moments, forever memories</div>
+        <h2>Our memories 📸</h2>
+        <p>Every picture holds a moment I want to keep close.</p>
+      </div>
+      <div class="gallery">
+        <img class="photo" src="photo1.jpg" alt="Our memory 1" loading="lazy">
+        <img class="photo" src="photo2.jpg" alt="Our memory 2" loading="lazy">
+        <img class="photo" src="photo3.jpg" alt="Our memory 3" loading="lazy">
+        <img class="photo" src="photo4.jpg" alt="Our memory 4" loading="lazy">
+        <img class="photo" src="photo5.jpg" alt="Our memory 5" loading="lazy">
+        <img class="photo" src="photo6.jpg" alt="Our memory 6" loading="lazy">
+        <img class="photo" src="photo7.jpg" alt="Our memory 7" loading="lazy">
+        <img class="photo" src="photo8.jpg" alt="Our memory 8" loading="lazy">
+      </div>
+    </section>
+
+    <section id="videos">
+      <div class="section-head">
+        <div class="eyebrow">A few moments in motion</div>
+        <h2>Our little movie 🎬</h2>
+        <p>These videos are set to play silently on their own. Tap the sound icon if you want to hear their original audio.</p>
+      </div>
+      <div class="videos">
+        <div class="video-card">
+          <video src="video1.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+          <div class="video-caption">A memory to replay ❤️</div>
+        </div>
+        <div class="video-card">
+          <video src="video2.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+          <div class="video-caption">One more little favourite ✨</div>
+        </div>
+        <div class="video-card">
+          <video src="video3.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+          <div class="video-caption">And this one, always 💗</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="music">
+      <div class="section-head">
+        <div class="eyebrow">A melody just for you</div>
+        <h2>Our little soundtrack 🎵</h2>
+        <p>Some feelings are better expressed through music.</p>
+      </div>
+      <div class="music-card">
+        <div class="music-icon">🎧</div>
+        <h3>Myraaa, this one's for you ❤️</h3>
+        <p>A little song, holding a thousand feelings.</p>
+        <button class="button" id="playButton" type="button" onclick="playOurSong()">💗 Tap to unlock our song ♡</button>
+        <audio id="ourSong" src="our%20song.mp3" loop preload="auto"></audio>
+        <p class="small" id="songStatus" aria-live="polite">Made with love, just for you.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-heart">♡</div>
+    Made with all my love, just for you, Myraaa.
+  </footer>
+
+  <script>
+    async function playOurSong() {
+      const song = document.getElementById("ourSong");
+      const status = document.getElementById("songStatus");
+      const button = document.getElementById("playButton");
+      try {
+        await song.play();
+        status.textContent = "Now playing our song ❤️";
+        button.textContent = "♫ Our song is playing";
+      } catch (error) {
+        status.textContent = "The song couldn't load. Please check the MP3 filename in GitHub.";
+      }
+    }
+
+    // Ask the browser to start each video muted. Muted autoplay is allowed
+    // by most mobile browsers; the controls remain available to the viewer.
+    document.querySelectorAll("video[autoplay]").forEach((video) => {
+      video.muted = true;
+      const startVideo = () => {
+        const result = video.play();
+        if (result && typeof result.catch === "function") result.catch(() => {});
+      };
+      startVideo();
+      video.addEventListener("loadeddata", startVideo, { once: true });
+    });
+  </script>
+</body>
+</html>
