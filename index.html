@@ -1122,31 +1122,44 @@ function showBirthdaySurprise() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("game-welcome").style.display = "block";
+  document.getElementById("game-play").style.display = "none";
+});
+function startMyraaGame() {
+  document.getElementById("game-welcome").style.display = "none";
+  document.getElementById("game-play").style.display = "block";
   loadGameQuestion();
+  
 });
  
 </script>
 
 <!-- MYRAA'S BIRTHDAY GAME -->
+
 <section id="myraa-game">
   <div class="game-card">
-    <p class="game-label">A LITTLE CHALLENGE FOR YOU ♡</p>
-    <h2>How Well Do You Know Us?</h2>
-    <p id="game-intro">Let's see how well you remember our little world together.</p>
 
-    <div class="game-progress">
-      <div id="game-progress-fill"></div>
+    <div id="game-welcome">
+      <p class="game-label">A LITTLE CHALLENGE FOR YOU ♡</p>
+      <h2>How Well Do You Know Us?</h2>
+      <p>Every little memory tells a story. Let's see how many you remember.</p>
+      <button onclick="startMyraaGame()">START GAME ♡</button>
     </div>
 
-    <p id="game-count">Question 1 of 9</p>
-    <h3 id="game-question"></h3>
+    <div id="game-play" style="display:none;">
+      <div class="game-progress">
+        <div id="game-progress-fill"></div>
+      </div>
 
-    <div id="game-options"></div>
-    <p id="game-feedback"></p>
+      <p id="game-count">Question 1 of 9</p>
+      <h3 id="game-question"></h3>
+      <div id="game-options"></div>
+      <p id="game-feedback"></p>
 
-    <button id="game-next" onclick="nextGameQuestion()" disabled>
-      NEXT ♡
-    </button>
+      <button id="game-next" onclick="nextGameQuestion()" disabled>
+        NEXT ♡
+      </button>
+    </div>
 
     <div id="game-result" style="display:none;">
       <h2>You did it, Myraa! ♡</h2>
@@ -1160,8 +1173,10 @@ document.addEventListener("DOMContentLoaded", function () {
       <p>Happy Birthday, Myraa. You make ordinary moments feel special. I hope your day is as wonderful as you are.</p>
       <p>With love, always. ♡</p>
     </div>
+
   </div>
 </section>
+
 
 </body>
 </html>
