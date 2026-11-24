@@ -164,24 +164,57 @@ Your person ❤️
  </div>
 </section>
 
+
 <section id="gallery">
- <div class="section-title">
-  <div class="eyebrow">Little pieces of forever</div>
-  <h2>Our memories 📸</h2>
-  <p>Add your favourite pictures here. Each one tells a story.</p>
- </div>
- <div class="gallery" id="galleryGrid">
-  <div class="photo"><label>＋ Add our first photo<input type="file" accept="image/*" onchange="addPhoto(this)"></label></div>
-  <div class="photo"><label>＋ A favourite memory<input type="file" accept="image/*" onchange="addPhoto(this)"></label></div>
-  <div class="photo"><label>＋ My favourite smile<input type="file" accept="image/*" onchange="addPhoto(this)"></label></div>
-  <div class="photo"><label>＋ A special moment<input type="file" accept="image/*" onchange="addPhoto(this)"></label></div>
-  <div class="photo"><label>＋ Another memory<input type="file" accept="image/*" onchange="addPhoto(this)"></label></div>
-  <div class="photo"><label>＋ More memories<input type="file" accept="image/*" onchange="addPhoto(this)"></label></div>
- </div>
- <p class="small" style="text-align:center;margin-top:18px">Choose photos from your device to preview them here.</p>
+  <div class="section-title">
+    <div class="eyebrow">Little pieces of forever</div>
+    <h2>Our memories 📸</h2>
+    <p>Every picture, every moment, a little piece of us. ❤️</p>
+  </div>
+
+  <div class="gallery" id="galleryGrid">
+
+    <div class="photo">
+      <img src="photo1.jpg" alt="Our memory 1">
+    </div>
+    <div class="photo">
+      <img src="photo2.jpg" alt="Our memory 2">
+    </div>
+    <div class="photo">
+      <img src="photo3.jpg" alt="Our memory 3">
+    </div>
+    <div class="photo">
+      <img src="photo4.jpg" alt="Our memory 4">
+    </div>
+    <div class="photo">
+      <img src="photo5.jpg" alt="Our memory 5">
+    </div>
+    <div class="photo">
+      <img src="photo6.jpg" alt="Our memory 6">
+    </div>
+    <div class="photo">
+      <img src="photo7.jpg" alt="Our memory 7">
+    </div>
+    <div class="photo">
+      <img src="photo8.jpg" alt="Our memory 8">
+    </div>
+
+    <div class="photo">
+      <video src="video1.mp4" controls playsinline preload="metadata"
+        style="width:100%;height:180px;object-fit:cover"></video>
+    </div>
+    <div class="photo">
+      <video src="video2.mp4" controls playsinline preload="metadata"
+        style="width:100%;height:180px;object-fit:cover"></video>
+    </div>
+    <div class="photo">
+      <video src="video3.mp4" controls playsinline preload="metadata"
+        style="width:100%;height:180px;object-fit:cover"></video>
+    </div>
+
+  </div>
 </section>
 
-<section id="timeline">
  <div class="section-title">
   <div class="eyebrow">Our little story</div>
   <h2>It started with us 🌷</h2>
@@ -207,22 +240,55 @@ Your person ❤️
  </div>
 </section>
 
+
 <section id="music">
- <div class="section-title">
-  <div class="eyebrow">A melody for you</div>
-  <h2>Our little soundtrack 🎵</h2>
-  <p>Add a song that reminds you of her.</p>
- </div>
- <div class="card music">
-  <div style="font-size:42px">🎧</div>
-  <h3>Play our special song</h3>
-  <input type="file" accept="audio/*" id="musicFile">
-  <audio id="player" controls style="display:none;width:100%"></audio>
-  <p class="small">Select an audio file from your phone. Music plays after you press play.</p>
- </div>
+  <div class="section-title">
+    <div class="eyebrow">A melody just for you</div>
+    <h2>Our little soundtrack 🎵</h2>
+    <p>Some feelings are better expressed through music.</p>
+  </div>
+
+  <div class="card music">
+    <div style="font-size:48px">🎧</div>
+    <h3>Myraaa, this one's for you ❤️</h3>
+    <p>A little song, holding a thousand feelings.</p>
+
+    <button class="primary" onclick="playOurSong()">
+      💗 Tap to unlock our song ♡
+    </button>
+
+    <audio id="ourSong" src="our-song.mp3"
+      loop preload="auto"></audio>
+    <script>
+function playOurSong() {
+  const song = document.getElementById('ourSong');
+  const status = document.getElementById('songStatus');
+
+  song.play().then(() => {
+    status.textContent = 'Now playing our song ❤️';
+  }).catch(() => {
+    status.textContent = 'Please tap again 💗';
+  });
+}
+    </script>
+<script>
+function playOurSong() {
+  const song = document.getElementById('ourSong');
+  const status = document.getElementById('songStatus');
+
+  song.play().then(() => {
+    status.textContent = 'Now playing our song ❤️';
+  }).catch(() => {
+    status.textContent = 'Please tap again 💗';
+  });
+}
+</script>
+    <p class="small" id="songStatus">
+      Made with love, just for you.
+    </p>
+  </div>
 </section>
 
-<section id="surprise">
  <div class="surprise">
   <div class="eyebrow">One last little surprise</div>
   <h2 style="font-size:36px">Can I tell you a secret? 🥺</h2>
