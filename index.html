@@ -1003,6 +1003,52 @@ footer p {
     opacity: 0;
   }
 }
+  /* FALLING SUNFLOWER PETALS */
+
+#fallingPetals {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sunflower-petal {
+  position: absolute;
+  top: -30px;
+  width: 12px;
+  height: 22px;
+  background: linear-gradient(
+    135deg,
+    #ffe58a,
+    #e8a927
+  );
+  border-radius: 100% 0 100% 0;
+
+  box-shadow: 0 0 9px rgba(255,190,60,.35);
+
+  animation: petalFall linear forwards;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(50vh) translateX(35px) rotate(180deg);
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(-35px) rotate(420deg);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
@@ -1752,7 +1798,7 @@ function showBouquetSurprise() {
 
   bouquet.classList.add("show");
 startGoldenParticles();
-  
+startFallingPetals();  
 }
 /* GOLDEN PARTICLE EFFECT */
 
@@ -1794,6 +1840,45 @@ function startGoldenParticles() {
   }
 
   particleInterval = setInterval(createParticle, 300);
+}
+  /* FALLING PETAL EFFECT */
+
+let petalInterval = null;
+
+function startFallingPetals() {
+
+  const container =
+    document.getElementById("fallingPetals");
+
+  if (petalInterval) return;
+
+  function createPetal() {
+
+    const petal = document.createElement("span");
+
+    petal.className = "sunflower-petal";
+
+    petal.style.left =
+      Math.random() * 100 + "%";
+
+    petal.style.animationDuration =
+      (Math.random() * 4 + 5) + "s";
+
+    petal.style.animationDelay =
+      Math.random() * 2 + "s";
+
+    container.appendChild(petal);
+
+    setTimeout(() => {
+      petal.remove();
+    }, 12000);
+  }
+
+  for (let i = 0; i < 8; i++) {
+    createPetal();
+  }
+
+  petalInterval = setInterval(createPetal, 850);
 }
 </script>
 
@@ -1840,6 +1925,7 @@ function startGoldenParticles() {
   </div>
 </section>
 <div id="goldenParticles"></div>
+  <div id="fallingPetals"></div>
 
 
 </body>
