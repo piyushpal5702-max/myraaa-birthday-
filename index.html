@@ -960,7 +960,49 @@ footer p {
     max-height: 55vh;
   }
 }
+/* GOLDEN FLOATING PARTICLES */
 
+#goldenParticles {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.golden-particle {
+  position: absolute;
+  bottom: -20px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f5d58b;
+  box-shadow:
+    0 0 8px #f5d58b,
+    0 0 18px rgba(245,213,139,.7);
+
+  animation: particleRise 4s ease-in infinite;
+}
+
+@keyframes particleRise {
+  0% {
+    transform: translateY(0) scale(.5);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: .8;
+  }
+
+  100% {
+    transform: translateY(-105vh) scale(1.4);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
@@ -1699,7 +1741,7 @@ deckRender();
 
   /* ===== BOUQUET SURPRISE FUNCTION ===== */
 
-function showBouquetSurprise() {
+function showBouquetSurprise() { 
 
   const bouquet =
     document.getElementById("bouquetSurprise");
@@ -1709,9 +1751,50 @@ function showBouquetSurprise() {
   void bouquet.offsetWidth;
 
   bouquet.classList.add("show");
-
+startGoldenParticles();
+  
 }
+/* GOLDEN PARTICLE EFFECT */
 
+let particleInterval = null;
+
+function startGoldenParticles() {
+
+  const container =
+    document.getElementById("goldenParticles");
+
+  if (particleInterval) return;
+
+  function createParticle() {
+
+    const particle = document.createElement("span");
+
+    particle.className = "golden-particle";
+
+    particle.style.left =
+      Math.random() * 100 + "%";
+
+    const size = Math.random() * 4 + 3;
+
+    particle.style.width = size + "px";
+    particle.style.height = size + "px";
+
+    particle.style.animationDuration =
+      (Math.random() * 3 + 3) + "s";
+
+    container.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 6500);
+  }
+
+  for (let i = 0; i < 18; i++) {
+    createParticle();
+  }
+
+  particleInterval = setInterval(createParticle, 300);
+}
 </script>
 
 <!-- MYRAA'S BIRTHDAY GAME -->
@@ -1756,7 +1839,7 @@ function showBouquetSurprise() {
 
   </div>
 </section>
-
+<div id="goldenParticles"></div>
 
 
 </body>
