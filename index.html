@@ -1048,6 +1048,36 @@ footer p {
     transform: translateY(110vh) translateX(-35px) rotate(420deg);
     opacity: 0;
   }
+} 
+  /* ===== SECOND CINEMATIC EDIT ===== */
+.second-edit-section {
+  padding: 90px 20px;
+  text-align: center;
+}
+
+.second-edit-section .edit-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.second-edit-frame {
+  width: min(100%, 420px);
+  margin: 35px auto 0;
+  padding: 10px;
+  border: 1px solid rgba(232,205,165,.55);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #4b2936, #21121d);
+  box-shadow: 0 15px 45px rgba(0,0,0,.4);
+}
+
+.second-edit-frame video {
+  display: block;
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 10px;
 }
 </style>
 </head>
@@ -1923,6 +1953,25 @@ function startFallingPetals() {
     </div>
 
   </div>
+</section> 
+  <!-- SECOND CINEMATIC EDIT -->
+<section class="second-edit-section reveal">
+
+  <div class="eyebrow">A LITTLE SOMETHING MORE ♡</div>
+
+  <h2>A Little More <span class="gold">of You.</span></h2>
+
+  <p class="edit-subtitle">
+    Because one edit could never be enough.
+  </p>
+
+  <div class="second-edit-frame">
+    <video controls playsinline preload="metadata">
+      <source src="./her-edit.mp4" type="video/mp4">
+      Your browser does not support this video.
+    </video>
+  </div>
+
 </section>
 <div id="goldenParticles"></div>
   <div id="fallingPetals"></div>
